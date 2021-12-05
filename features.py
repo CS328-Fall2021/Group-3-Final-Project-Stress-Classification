@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-This file is used for extracting features over windows of tri-axial accelerometer 
+This file is used for extracting features over windows of PPG data
 data. We recommend using helper functions like _compute_mean_features(window) to 
 extract individual features.
 
@@ -36,19 +36,6 @@ def _compute_max(window):
 
 def _compute_min(window):
     return np.min(window, axis=0)
-
-# def _compute_peaks(window):
-#     return np.histogram(window, bins=7)[0]
-
-def _compute_peak_len(window):
-    mag = []
-    
-    for e in window:
-        m = np.sqrt((e[0]*e[0])+(e[1]*e[1])+(e[2]*e[2]))
-        mag.append(m)
-    peaks, _ = find_peaks(mag, prominence=1)
-    return [len(peaks)]
-
 
 def extract_features(window):
     """
@@ -86,10 +73,6 @@ def extract_features(window):
     feature_names.append("x_min")
     feature_names.append("y_min")
     feature_names.append("z_min")
-    
-    x.append(_compute_peak_len(window))
-    feature_names.append("peak length")
-
 
     feature_vector = np.concatenate(x, axis=0) # convert the list of features to a single 1-dimensional vector
     return feature_names, feature_vector
