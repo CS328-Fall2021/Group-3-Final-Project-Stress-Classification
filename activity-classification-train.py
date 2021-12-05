@@ -36,12 +36,12 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-print("Reorienting accelerometer data...")
-sys.stdout.flush()
-reset_vars()
-reoriented = np.asarray([reorient(data[i,1], data[i,2], data[i,3]) for i in range(len(data))])
-reoriented_data_with_timestamps = np.append(data[:,0:1],reoriented,axis=1)
-data = np.append(reoriented_data_with_timestamps, data[:,-1:], axis=1)
+#print("Reorienting accelerometer data...")
+#sys.stdout.flush()
+#reset_vars()
+#reoriented = np.asarray([reorient(data[i,1], data[i,2], data[i,3]) for i in range(len(data))])
+#reoriented_data_with_timestamps = np.append(data[:,0:1],reoriented,axis=1)
+#data = np.append(reoriented_data_with_timestamps, data[:,-1:], axis=1)
 
 # %%---------------------------------------------------------------------------
 #
@@ -53,9 +53,9 @@ window_size = 20
 step_size = 20
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
-n_samples = 1000
-time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 1000
-sampling_rate = n_samples / time_elapsed_seconds
+#n_samples = 1000
+#time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 1000
+#sampling_rate = n_samples / time_elapsed_seconds
 
 # TODO: list the class labels that you collected data for in the order of label_index (defined in collect-labelled-data.py)
 class_names = ["nostress", "stressed"] #...
