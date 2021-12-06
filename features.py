@@ -28,8 +28,8 @@ def _compute_mean_features(window):
 def _compute_standard_dev_features(window):
     return np.std(window, axis=0)
 
-def _compute_dom_freq(window):
-    return np.fft.rfft(window, axis=0).astype(float)[1]
+#def _compute_dom_freq(window):
+    #return np.fft.rfft(window, axis=0).astype(float)[1]
 
 def _compute_max(window):
     return np.max(window, axis=0)
@@ -55,8 +55,8 @@ def extract_features(window):
     x.append(_compute_standard_dev_features(window))
     feature_names.append("bpm_std")
     
-    x.append(_compute_dom_freq(window))
-    feature_names.append("bpm_dom")
+    #x.append(_compute_dom_freq(window))
+    #feature_names.append("bpm_dom")
     
     
     x.append(_compute_max(window))

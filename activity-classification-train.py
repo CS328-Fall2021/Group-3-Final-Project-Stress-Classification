@@ -26,9 +26,10 @@ print("Loading data...")
 sys.stdout.flush()
 data_file = 'my-ppg-data.csv'
 data = np.genfromtxt(data_file, delimiter=',')
-print(np.isnan(data))
+#print(np.isnan(data))
 print("Loaded {} raw labelled activity data samples.".format(len(data)))
 sys.stdout.flush()
+#print(data)
 
 # %%---------------------------------------------------------------------------
 #
@@ -49,13 +50,13 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-window_size = 10
-step_size = 5
+window_size = 60
+step_size = 60
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
-#n_samples = 1000
-#time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 1000
-#sampling_rate = n_samples / time_elapsed_seconds
+n_samples = 60
+time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
+sampling_rate = n_samples / time_elapsed_seconds
 
 # TODO: list the class labels that you collected data for in the order of label_index (defined in collect-labelled-data.py)
 class_names = ["nostress", "stressed"] #...
@@ -67,14 +68,15 @@ X = []
 Y = []
 
 for i,window_with_timestamp_and_label in slidingWindow(data, window_size, step_size):
-    window = window_with_timestamp_and_label[:,1:-1]   
+    window = window_with_timestamp_and_label[:,1:-1] 
     feature_names, x = extract_features(window)
     X.append(x)
-    Y.append(window_with_timestamp_and_label[10, -1])
+    Y.append(window_with_timestamp_and_label[1, -1])
     
 X = np.asarray(X)
 Y = np.asarray(Y)
 n_features = len(X)
+#print(n_features)
     
 print("Finished feature extraction over {} windows".format(len(X)))
 print("Unique labels found: {}".format(set(Y)))
@@ -90,7 +92,7 @@ sys.stdout.flush()
 
 # TODO: split data into train and test datasets using 10-fold cross validation
 
-cv = model_selection.KFold(n_splits=3, random_state=None, shuffle=True)
+cv = model_selection.KFold(n_splits=2, random_state=None, shuffle=True)
 
 """
 TODO: iterating over each fold, fit a decision tree classifier on the training set.
