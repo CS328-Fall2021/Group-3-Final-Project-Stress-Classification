@@ -90,7 +90,7 @@ sys.stdout.flush()
 
 # TODO: split data into train and test datasets using 10-fold cross validation
 
-cv = model_selection.KFold(n_splits=10, random_state=None, shuffle=True)
+cv = model_selection.KFold(n_splits=3, random_state=None, shuffle=True)
 
 """
 TODO: iterating over each fold, fit a decision tree classifier on the training set.

@@ -28,8 +28,8 @@ def _compute_mean_features(window):
 def _compute_standard_dev_features(window):
     return np.std(window, axis=0)
 
-#def _compute_dom_freq(window):
-    #return np.fft.rfft(window, axis=0).astype(float)[1]
+def _compute_dom_freq(window):
+    return np.fft.rfft(window, axis=0).astype(float)[1]
 
 def _compute_max(window):
     return np.max(window, axis=0)
@@ -59,10 +59,10 @@ def extract_features(window):
     feature_names.append("y_std")
     feature_names.append("z_std")
     
-    #x.append(_compute_dom_freq(window))
-    #feature_names.append("x_dom")
-    #feature_names.append("y_dom")
-    #feature_names.append("z_dom")
+    x.append(_compute_dom_freq(window))
+    feature_names.append("x_dom")
+    feature_names.append("y_dom")
+    feature_names.append("z_dom")
     
     x.append(_compute_max(window))
     feature_names.append("x_max")
