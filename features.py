@@ -49,30 +49,23 @@ def extract_features(window):
     feature_names = []
 
     x.append(_compute_mean_features(window))
-    feature_names.append("x_mean")
-    feature_names.append("y_mean")
-    feature_names.append("z_mean")
+    feature_names.append("bpm_mean")
 
     # TODO: call functions to compute other features. Append the features to x and the names of these features to feature_names
     x.append(_compute_standard_dev_features(window))
-    feature_names.append("x_std")
-    feature_names.append("y_std")
-    feature_names.append("z_std")
+    feature_names.append("bpm_std")
     
     x.append(_compute_dom_freq(window))
-    feature_names.append("x_dom")
-    feature_names.append("y_dom")
-    feature_names.append("z_dom")
+    feature_names.append("bpm_dom")
+    
     
     x.append(_compute_max(window))
-    feature_names.append("x_max")
-    feature_names.append("y_max")
-    feature_names.append("z_max")
+    feature_names.append("bpm_max")
+    
 
     x.append(_compute_min(window))
-    feature_names.append("x_min")
-    feature_names.append("y_min")
-    feature_names.append("z_min")
+    feature_names.append("bpm_min")
+    
 
     feature_vector = np.concatenate(x, axis=0) # convert the list of features to a single 1-dimensional vector
     return feature_names, feature_vector
