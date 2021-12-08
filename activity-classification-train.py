@@ -9,7 +9,7 @@ import sys
 import numpy as np
 from sklearn.tree import export_graphviz
 from features import extract_features
-from util import slidingWindow, reorient, reset_vars
+#from util import slidingWindow, reorient, reset_vars
 from sklearn import model_selection
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import KFold
@@ -67,7 +67,7 @@ sys.stdout.flush()
 X = []
 Y = []
 
-for i,window_with_timestamp_and_label in slidingWindow(data, window_size, step_size):
+for i, window_with_timestamp_and_label in slidingWindow(data, window_size, step_size):
     window = window_with_timestamp_and_label[:,1:-1] 
     feature_names, x = extract_features(window)
     X.append(x)
@@ -92,7 +92,7 @@ sys.stdout.flush()
 
 # TODO: split data into train and test datasets using 10-fold cross validation
 
-cv = model_selection.KFold(n_splits=2, random_state=None, shuffle=True)
+cv = model_selection.KFold(n_splits=10, random_state=None, shuffle=True)
 
 """
 TODO: iterating over each fold, fit a decision tree classifier on the training set.
@@ -144,5 +144,10 @@ export_graphviz(tree, out_file='tree.dot', feature_names = feature_names)
 
 # TODO: Save the classifier to disk - replace 'tree' with your decision tree and run the below line
 
-with open('classifier.pickle', 'wb') as f:
+#to store classifier based on all features
+with open('classifierallfeatures.pickle', 'wb') as f:
     pickle.dump(tree, f)
+    
+#to store classifier based only on heart rate variability
+#with open('classifierhrvariability.pickle', 'wb') as f:
+    #pickle.dump(tree, f)

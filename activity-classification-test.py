@@ -37,12 +37,12 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-print("Reorienting accelerometer data...")
-sys.stdout.flush()
-reset_vars()
-reoriented = np.asarray([reorient(data[i,1], data[i,2], data[i,3]) for i in range(len(data))])
-reoriented_data_with_timestamps = np.append(data[:,0:1],reoriented,axis=1)
-data = np.append(reoriented_data_with_timestamps, data[:,-1:], axis=1)
+#print("Reorienting accelerometer data...")
+#sys.stdout.flush()
+#reset_vars()
+#reoriented = np.asarray([reorient(data[i,1], data[i,2], data[i,3]) for i in range(len(data))])
+#reoriented_data_with_timestamps = np.append(data[:,0:1],reoriented,axis=1)
+#data = np.append(reoriented_data_with_timestamps, data[:,-1:], axis=1)
 
 # %%---------------------------------------------------------------------------
 #
@@ -50,16 +50,16 @@ data = np.append(reoriented_data_with_timestamps, data[:,-1:], axis=1)
 #
 # -----------------------------------------------------------------------------
 
-window_size = 20
-step_size = 20
+window_size = 10
+step_size = 10
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
-n_samples = 1000
-time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 1000
+n_samples = 60
+time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
 sampling_rate = n_samples / time_elapsed_seconds
 
 # TODO: list the class labels that you collected data for in the order of label_index (defined in collect-labelled-data.py)
-class_names = ["walking", "downhill", "sitting", "uphill"] #...
+class_names = ["nostress", "stress"] #...
 
 print("Extracting features and labels for window size {} and step size {}...".format(window_size, step_size))
 sys.stdout.flush()
@@ -97,8 +97,13 @@ for train_index, test_index in cv.split(X):
 #pickled_model = pickle.load(open('classifier.pickle', 'rb'))
 #pickled_model.predict(X_test)
 
-with open('classifier.pickle','rb') as modelFile:
+with open('classifierallfeatures.pickle','rb') as modelFile:
      model = pickle.load(modelFile)
+
+#For second classifier only heart rate variability
+
+#with open('classifierhrvariability.pickle','rb') as modelFile:
+     #model = pickle.load(modelFile)
         
 prediction = model.predict(X)
 #score = model.score(X_test, y_test)
