@@ -9,7 +9,7 @@ import sys
 import numpy as np
 from sklearn.tree import export_graphviz
 from features import extract_features
-#from util import slidingWindow, reorient, reset_vars
+from util import slidingWindow, reorient, reset_vars
 from sklearn import model_selection
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import KFold
@@ -50,13 +50,13 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-window_size = 60
-step_size = 60
+window_size = 5
+step_size = 5
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
 n_samples = 60
-time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
-sampling_rate = n_samples / time_elapsed_seconds
+#time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
+#sampling_rate = n_samples / time_elapsed_seconds
 
 # TODO: list the class labels that you collected data for in the order of label_index (defined in collect-labelled-data.py)
 class_names = ["nostress", "stressed"] #...
@@ -71,13 +71,14 @@ for i, window_with_timestamp_and_label in slidingWindow(data, window_size, step_
     window = window_with_timestamp_and_label[:,1:-1] 
     feature_names, x = extract_features(window)
     X.append(x)
-    Y.append(window_with_timestamp_and_label[1, -1])
+    Y.append(window_with_timestamp_and_label[4, -1])
     
 X = np.asarray(X)
 Y = np.asarray(Y)
 n_features = len(X)
 #print(n_features)
-    
+print(X)
+print(Y)
 print("Finished feature extraction over {} windows".format(len(X)))
 print("Unique labels found: {}".format(set(Y)))
 print("\n")

@@ -101,7 +101,6 @@ with open('classifierallfeatures.pickle','rb') as modelFile:
      model = pickle.load(modelFile)
 
 #For second classifier only heart rate variability
-
 #with open('classifierhrvariability.pickle','rb') as modelFile:
      #model = pickle.load(modelFile)
         
