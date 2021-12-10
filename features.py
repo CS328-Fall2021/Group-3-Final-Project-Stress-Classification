@@ -44,8 +44,8 @@ def extract_features(window):
     x = []
     feature_names = []
 
-    #x.append(_compute_mean_features(window))
-    #feature_names.append("bpm_mean")
+    x.append(_compute_mean_features(window))
+    feature_names.append("bpm_mean")
 
     # TODO: call functions to compute other features. Append the features to x and the names of these features to feature_names
     x.append(_compute_standard_dev_features(window))
@@ -55,8 +55,8 @@ def extract_features(window):
     #feature_names.append("bpm_dom")
     
     
-    #x.append(_compute_max(window))
-    #feature_names.append("bpm_max")
+    x.append(_compute_max(window))
+    feature_names.append("bpm_max")
     
 
     x.append(_compute_min(window))

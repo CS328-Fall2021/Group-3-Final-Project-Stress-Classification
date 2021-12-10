@@ -25,7 +25,7 @@ import pickle
 
 print("Loading data...")
 sys.stdout.flush()
-data_file = 'Test_Data.csv'
+data_file = 'my-test-data.csv'
 data = np.genfromtxt(data_file, delimiter=',')
 #print(np.isnan(data))
 print("Loaded {} raw labelled activity data samples.".format(len(data)))
@@ -50,16 +50,16 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-window_size = 10
-step_size = 10
+window_size = 5
+step_size = 5
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
 n_samples = 60
-time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
-sampling_rate = n_samples / time_elapsed_seconds
+#time_elapsed_seconds = (data[n_samples,0] - data[0,0]) / 60
+#sampling_rate = n_samples / time_elapsed_seconds
 
 # TODO: list the class labels that you collected data for in the order of label_index (defined in collect-labelled-data.py)
-class_names = ["nostress", "stress"] #...
+class_names = ["nostress", "stressed"] #...
 
 print("Extracting features and labels for window size {} and step size {}...".format(window_size, step_size))
 sys.stdout.flush()
@@ -67,16 +67,18 @@ sys.stdout.flush()
 X = []
 Y = []
 
-for i,window_with_timestamp_and_label in slidingWindow(data, window_size, step_size):
-    window = window_with_timestamp_and_label[:,1:-1]   
+for i, window_with_timestamp_and_label in slidingWindow(data, window_size, step_size):
+    window = window_with_timestamp_and_label[:,1:-1] 
     feature_names, x = extract_features(window)
     X.append(x)
-    Y.append(window_with_timestamp_and_label[10, -1])
+    Y.append(window_with_timestamp_and_label[4, -1])
     
 X = np.asarray(X)
 Y = np.asarray(Y)
 n_features = len(X)
-    
+#print(n_features)
+print(X)
+print(Y)
 print("Finished feature extraction over {} windows".format(len(X)))
 #print("Unique labels found: {}".format(set(Y)))
 print("\n")
@@ -101,7 +103,15 @@ with open('classifierallfeatures.pickle','rb') as modelFile:
      model = pickle.load(modelFile)
 
 #For second classifier only heart rate variability
-#with open('classifierhrvariability.pickle','rb') as modelFile:
+#with open('classifierhrvonly.pickle','rb') as modelFile:
+     #model = pickle.load(modelFile)
+    
+#For third classifier with no max
+#with open('classifiernomax.pickle','rb') as modelFile:
+     #model = pickle.load(modelFile)
+    
+#For fourth classifier with no max or mean
+#with open('classifiernomaxnomean.pickle','rb') as modelFile:
      #model = pickle.load(modelFile)
         
 prediction = model.predict(X)
