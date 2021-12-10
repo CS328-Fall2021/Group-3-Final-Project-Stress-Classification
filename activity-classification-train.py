@@ -146,9 +146,9 @@ export_graphviz(tree, out_file='tree.dot', feature_names = feature_names)
 # TODO: Save the classifier to disk - replace 'tree' with your decision tree and run the below line
 
 #to store classifier based on all features
-with open('classifierallfeatures.pickle', 'wb') as f:
-    pickle.dump(tree, f)
+#with open('classifierallfeatures.pickle', 'wb') as f:
+    #pickle.dump(tree, f)
     
 #to store classifier based only on heart rate variability
-#with open('classifierhrvariability.pickle', 'wb') as f:
+#with open('classifiernomaxnomean.pickle', 'wb') as f:
     #pickle.dump(tree, f)
