@@ -50,8 +50,8 @@ sys.stdout.flush()
 #
 # -----------------------------------------------------------------------------
 
-window_size = 5
-step_size = 5
+window_size = 60
+step_size = 60
 
 # sampling rate should be about 25 Hz; you can take a brief window to confirm this
 n_samples = 60
