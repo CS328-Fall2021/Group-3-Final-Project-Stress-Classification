@@ -99,12 +99,12 @@ for train_index, test_index in cv.split(X):
 #pickled_model = pickle.load(open('classifier.pickle', 'rb'))
 #pickled_model.predict(X_test)
 
-with open('classifierallfeatures.pickle','rb') as modelFile:
-     model = pickle.load(modelFile)
+#with open('classifierallfeatures.pickle','rb') as modelFile:
+     #model = pickle.load(modelFile)
 
 #For second classifier only heart rate variability
-#with open('classifierhrvonly.pickle','rb') as modelFile:
-     #model = pickle.load(modelFile)
+with open('classifierhrvonly.pickle','rb') as modelFile:
+     model = pickle.load(modelFile)
     
 #For third classifier with no max
 #with open('classifiernomax.pickle','rb') as modelFile:
